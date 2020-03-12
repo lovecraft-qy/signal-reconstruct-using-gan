@@ -3,7 +3,7 @@
 @Date: 2020-03-12 12:16:41
 @Email: qinyangforever@foxmail.com
 @LastEditors: Qin Yang
-@LastEditTime: 2020-03-12 21:45:50
+@LastEditTime: 2020-03-12 21:53:12
 '''
 import math
 import torch
@@ -11,7 +11,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 
-__all__ = ['netG', 'netD']
+__all__ = ['Generator', 'Discriminator']
 
 
 class ResidualBlock(nn.Module):
@@ -61,9 +61,9 @@ class PixelShuffle1d(nn.Module):
         return x.view(batch_size, num_channels, -1)
 
 
-class netG(nn.Module):
+class Generator(nn.Module):
     def __init__(self, c_dim=12, num_channels=64, scale_factor=4., ScaleBlockType=UpsampleBlock):
-        super(netG, self).__init__()
+        super(Generator, self).__init__()
 
         upsampling_num_blocks = int(math.log2(scale_factor))
 
@@ -88,9 +88,9 @@ class netG(nn.Module):
         return F.tanh(x) / 2
 
 
-class netD(nn.Module):
+class Discriminator(nn.Module):
     def __init__(self, c_dim=12, num_layers=6, num_channels=64):
-        super(netD, self).__init__()
+        super(Discriminator, self).__init__()
 
         self.pri_block = nn.Sequential(
             nn.Conv1d(c_dim, num_channels, kernel_size=9, padding=4),
