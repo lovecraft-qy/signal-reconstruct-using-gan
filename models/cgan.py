@@ -3,13 +3,15 @@
 @Date: 2020-03-12 12:16:41
 @Email: qinyangforever@foxmail.com
 @LastEditors: Qin Yang
-@LastEditTime: 2020-03-12 17:28:56
+@LastEditTime: 2020-03-12 21:45:50
 '''
 import math
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
+
+__all__ = ['netG', 'netD']
 
 
 class ResidualBlock(nn.Module):
